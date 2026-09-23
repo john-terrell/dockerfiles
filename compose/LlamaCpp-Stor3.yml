@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  llama:
+    image: ghcr.io/ggml-org/llama.cpp:full-cuda
+    ports:
+      - "8080:8080"
+    volumes:
+      - /opt/models:/models
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card0:/dev/dri/card0
+      - /dev/dri/card1:/dev/dri/card1
+    environment:
+      - LLAMA_ARG_CTX_SIZE=262144
+      - LLAMA_ARG_MODEL=/models/Qwen3.8-27B-UD-Q4_K_M.gguf
+      - LLAMA_ARG_HOST=0.0.0.0
+      - LLAMA_ARG_PORT=8080
+      - LLAMA_ARG_THREADS=8
+      - LLAMA_ARG_N_PREDICT=512
+      - LLAMA_ARG_ALIAS="Qwen3.8-27B"
+      - LLAMA_ARG_ENDPOINT_METRICS=true
+    entrypoint: [ "/app/llama-server" ]
