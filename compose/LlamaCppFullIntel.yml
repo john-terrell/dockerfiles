@@ -6,12 +6,12 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./models:/models
+      - /root/models:/models
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card1:/dev/dri/card1
     environment:
-      - LLAMA_ARG_CTX_SIZE=131072
+      - LLAMA_ARG_CTX_SIZE=262144
       - LLAMA_ARG_MODEL=/models/Qwen3.8-27B-UD-Q4_K_M.gguf
       - LLAMA_ARG_HOST=0.0.0.0
       - LLAMA_ARG_PORT=8080
