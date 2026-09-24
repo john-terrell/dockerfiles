@@ -2,9 +2,10 @@ version: "3.9"
 
 services:
   llama:
+    name: llama
     image: ghcr.io/ggml-org/llama.cpp:full-intel
     ports:
-      - "8080:8080"
+      - "9931:9931"
     volumes:
       - /opt/models:/models
     devices:
@@ -14,9 +15,12 @@ services:
       - LLAMA_ARG_CTX_SIZE=262144
       - LLAMA_ARG_MODEL=/models/Qwen3.8-27B-UD-Q4_K_M.gguf
       - LLAMA_ARG_HOST=0.0.0.0
-      - LLAMA_ARG_PORT=8080
+      - LLAMA_ARG_PORT=9931
       - LLAMA_ARG_THREADS=8
       - LLAMA_ARG_N_PREDICT=512
       - LLAMA_ARG_ALIAS="Qwen3.8-27B"
       - LLAMA_ARG_ENDPOINT_METRICS=true
+      - LLAMA_ARG_CACHE_TYPE_K=q8_0
+      - LLAMA_ARG_CACHE_TYPE_V=q8_0
+      - LLAMA_ARG_N_GPU_LAYERS=999
     entrypoint: [ "/app/llama-server" ]
