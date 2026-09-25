@@ -10,9 +10,8 @@ services:
       - /opt/models:/models
       - /opt/public:/public
     devices:
-      - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/dri/card0:/dev/dri/card0
-      - /dev/dri/card1:/dev/dri/card1
+      - nvidia.com/gpu=all
+    security_opt: label=disable
     environment:
       - LLAMA_ARG_CTX_SIZE=262144
       - LLAMA_ARG_MODEL=/models/Qwen3.8-27B-UD-Q4_K_M.gguf
@@ -26,4 +25,5 @@ services:
       - LLAMA_ARG_CACHE_TYPE_V=q8_0
       - LLAMA_ARG_N_GPU_LAYERS=999
       - LLAMA_ARG_STATIC_PATH=/public
+      - LLAMA_ARG_SPLIT_MODE=layer
     entrypoint: [ "/app/llama-server" ]

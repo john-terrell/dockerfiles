@@ -1,0 +1,18 @@
+# Assume nvidia-container-toolkit installed (see web)
+
+# Generate CDI spec for all NVIDIA GPUs on the system
+sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+
+# Verify the generated spec
+nvidia-ctk cdi list
+# Example output:
+# INFO[0000] Found 2 CDI devices
+# nvidia.com/gpu=0
+# nvidia.com/gpu=all
+
+# Inspect the generated CDI file
+cat /etc/cdi/nvidia.yaml
+
+# Ensure Podman as the correct devices:
+--device nvidia.com/gpu=all \
+--security-opt=label=disable \
