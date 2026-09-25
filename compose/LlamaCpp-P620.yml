@@ -8,6 +8,7 @@ services:
       - "9931:9931"
     volumes:
       - /opt/models:/models
+      - /opt/public:/public
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128
       - /dev/dri/card1:/dev/dri/card1
@@ -23,4 +24,5 @@ services:
       - LLAMA_ARG_CACHE_TYPE_K=q8_0
       - LLAMA_ARG_CACHE_TYPE_V=q8_0
       - LLAMA_ARG_N_GPU_LAYERS=999
+      - LLAMA_ARG_STATIC_PATH=/public
     entrypoint: [ "/app/llama-server" ]
