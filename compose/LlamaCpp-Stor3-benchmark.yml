@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   llama:
-    name: llama
+    name: llama2
     image: ghcr.io/ggml-org/llama.cpp:full-cuda
     ports:
       - "9931:9931"
@@ -13,10 +13,7 @@ services:
       - nvidia.com/gpu=all
     security_opt: label=disable
     environment:
-      - LLAMA_ARG_N_PARALLEL=2
-      - LLAMA_ARG_FLASH_ATTN=on
       - LLAMA_ARG_CTX_SIZE=262144
-      - LLAMA_ARG_TEMPERATURE=0
       - LLAMA_ARG_MODEL=/models/Qwen3.8-27B-UD-Q4_K_M.gguf
       - LLAMA_ARG_HOST=0.0.0.0
       - LLAMA_ARG_PORT=9931
@@ -29,4 +26,4 @@ services:
       - LLAMA_ARG_N_GPU_LAYERS=999
       - LLAMA_ARG_STATIC_PATH=/public
       - LLAMA_ARG_SPLIT_MODE=layer
-    entrypoint: [ "/app/llama-server" ]
+    entrypoint: [ "/app/llama-bench", "-m", "/models/Qwen3.8-27B-UD-Q4_K_M.gguf" ]
