@@ -15,6 +15,7 @@ services:
     environment:
       - LLAMA_ARG_CTX_SIZE=262144
       - LLAMA_ARG_MODEL=/models/Qwen3.8-27B-UD-Q4_K_M.gguf
+      - LLAMA_ARG_MMPROJ=/models/mmproj-F16.gguf
       - LLAMA_ARG_HOST=0.0.0.0
       - LLAMA_ARG_PORT=9931
       - LLAMA_ARG_THREADS=8
